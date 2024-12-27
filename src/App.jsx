@@ -26,16 +26,18 @@ export const App = () => {
 
       <h1 className="title is-flex is-align-items-center">
         {message}
-        <button
-          data-cy="ClearButton"
-          type="button"
-          className="delete ml-3"
-          onClick={() => {
-            setMessage('No goods selected');
-            setBtnClose(false);
-          }}
-          style={btnClose ? { display: 'block' } : { display: 'none' }}
-        />
+        {btnClose && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => {
+              setSelectedGood('');
+              setMessage('No goods selected');
+              setBtnClose(false);
+            }}
+          />
+        )}
       </h1>
 
       <table className="table">
@@ -59,9 +61,6 @@ export const App = () => {
                       setMessage(`${good} is selected`);
                       setBtnClose(true);
                     }}
-                    style={
-                      setBtnClose ? { display: 'block' } : { display: 'none' }
-                    }
                   >
                     +
                   </button>
@@ -71,8 +70,8 @@ export const App = () => {
                     type="button"
                     className="button is-info"
                     onClick={() => {
-                      setMessage('No goods selected');
                       setSelectedGood('');
+                      setMessage('No goods selected');
                       setBtnClose(false);
                     }}
                   >
